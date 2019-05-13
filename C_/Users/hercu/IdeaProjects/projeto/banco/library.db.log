@@ -1,0 +1,58 @@
+/*C1*/SET SCHEMA SYSTEM_LOBS
+INSERT INTO BLOCKS VALUES(0,2147483647,0)
+COMMIT
+/*C2*/SET SCHEMA PUBLIC
+drop table tb_actress if exists
+drop table tb_cast if exists
+drop table tb_director if exists
+drop table tb_genre if exists
+drop table tb_movie if exists
+drop table tb_person_cast_pk if exists
+drop table tb_program_genre_pk if exists
+drop table tb_sitcom if exists
+drop sequence hibernate_sequence if exists
+create sequence hibernate_sequence start with 1 increment by 1
+create table tb_actress (id bigint not null, cl_country varchar(30), cl_gender integer, cl_height double, cl_hometown varchar(30), cl_name varchar(50), primary key (id))
+create table tb_cast (id bigint not null, primary key (id))
+create table tb_director (id bigint not null, cl_country varchar(30), cl_gender integer, cl_height double, cl_hometown varchar(30), cl_name varchar(50), primary key (id))
+create table tb_genre (id bigint not null, cl_description varchar(3), primary key (id))
+create table tb_movie (id bigint not null, cl_backdrop_path varchar(255), cl_country varchar(30), cl_idtmdb integer, cl_language varchar(30), cl_overview varchar(1500), cl_release_date date, cl_runtime integer, cl_title varchar(50), cl_cast_id bigint, primary key (id))
+create table tb_person_cast_pk (cl_cast_group_from_person bigint not null, cl_cast_person_from_cast bigint not null, primary key (cl_cast_group_from_person, cl_cast_person_from_cast))
+create table tb_program_genre_pk (cl_genre_group_from_program bigint not null, cl_genre_type_from_genre bigint not null, primary key (cl_genre_group_from_program, cl_genre_type_from_genre))
+create table tb_sitcom (id bigint not null, cl_backdrop_path varchar(255), cl_country varchar(30), cl_idtmdb integer, cl_language varchar(30), cl_overview varchar(1500), cl_release_date date, cl_runtime integer, cl_title varchar(50), cl_cast_id bigint, cl_seasons integer, primary key (id))
+alter table tb_movie add constraint FK_gw0cdlf74esd4g3nb7532mb5d foreign key (cl_cast_id) references tb_cast
+alter table tb_person_cast_pk add constraint FKcvq1cu82x78oru89euqpqmvwx foreign key (cl_cast_person_from_cast) references tb_cast
+alter table tb_program_genre_pk add constraint FKonnd4d8xevbov49b3dai53iki foreign key (cl_genre_type_from_genre) references tb_genre
+alter table tb_sitcom add constraint FK_muv7s9ib2uk13cd132t4h37l5 foreign key (cl_cast_id) references tb_cast
+alter table tb_movie drop constraint FK_gw0cdlf74esd4g3nb7532mb5d
+alter table tb_person_cast_pk drop constraint FKcvq1cu82x78oru89euqpqmvwx
+alter table tb_program_genre_pk drop constraint FKonnd4d8xevbov49b3dai53iki
+alter table tb_sitcom drop constraint FK_muv7s9ib2uk13cd132t4h37l5
+drop table tb_actress if exists
+drop table tb_cast if exists
+drop table tb_director if exists
+drop table tb_genre if exists
+drop table tb_movie if exists
+drop table tb_person_cast_pk if exists
+drop table tb_program_genre_pk if exists
+drop table tb_sitcom if exists
+drop sequence hibernate_sequence if exists
+DISCONNECT
+/*C3*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C4*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C5*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C6*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C7*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C8*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C9*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C10*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C11*/SET SCHEMA PUBLIC
+DISCONNECT
